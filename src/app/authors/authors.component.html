@@ -1,1 +1,20 @@
-<p>Authors List</p>
+<div class="container">
+  <h1>Authors List</h1>
+  <div *ngIf="authors.length > 0; else emptyList">
+    <div class="card" *ngFor="let author of authors">
+      <p class="card-content">{{author?.name}} - {{author?.books?.length}} books in the library</p>
+      <button class="btn" [routerLink]="'/author/'+author.id+'/books'">Go to books</button>
+      <button class="btn btn-danger" (click)="deleteAuthor(author.id)">Delete</button>
+    </div>
+  </div>
+  <ng-template #emptyList>
+    <h3>No Authors Added Yet</h3>
+  </ng-template>
+  <div class="card-button">
+    <button class="btn" (click)="showNewAuthorInput()">Add new Author</button>
+  </div>
+  <div *ngIf="isAddShown">
+    <input type="text" class="form-control" #input>
+    <button class="btn" (click)="addAuthor(input.value)">Add Author</button>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import {Book} from "./Book";
 
 export interface Author{
-  id: number,
+  id?: number,
   name: string,
-  books: Book[]
+  books?: Book[]
 }

@@ -1,1 +1,20 @@
-<p>books works!</p>
+<div class="container">
+  <h1>Books by {{author}}</h1>
+  <div *ngIf="books.length > 0; else emptyList">
+    <div class="card" *ngFor="let book of books">
+      <p class="card-content"><span [class.completed]="book.read">{{book.name}}</span></p>
+      <button class="btn" (click)="readBook(book)">{{book.read ? 'Mark Unread' : 'Mark Read'}}</button>
+      <button class="btn btn-danger" (click)="deleteBook(book.id)">Delete</button>
+    </div>
+  </div>
+  <div class="card-button">
+    <button class="btn" (click)="isAddShown=!isAddShown">Add Book By {{author}}</button>
+  </div>
+  <div *ngIf="isAddShown">
+    <input type="text" class="form-control" #input>
+    <button class="btn" (click)="addBook(input.value)">Add Book</button>
+  </div>
+</div>
+<ng-template #emptyList>
+  <h3>No Books Added Yet</h3>
+</ng-template>

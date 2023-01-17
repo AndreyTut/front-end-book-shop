@@ -1,1 +1,13 @@
-<p>all-books works!</p>
+<div class="container">
+  <h1>All Books by Alphabet</h1>
+  <div *ngIf="books.length>0; else emptyList">
+    <div class="card" *ngFor="let book of books">
+      <p class="card-content"><span [class.completed]="book.read">{{book.name}}. Author: {{book.authorName}}</span></p>
+      <button (click)="read(book)" class="btn">{{book.read ? 'Mark Unread' : 'Mark Read'}}</button>
+      <button class="btn btn-danger" (click)="deleteBook(book.id)">Delete</button>
+    </div>
+  </div>
+</div>
+<ng-template #emptyList>
+  <h3>No Books Added Yet</h3>
+</ng-template>
